@@ -29,6 +29,7 @@ let game = {
     moth_counter: 0,
     moth_counter_total: 0,
     moth_multiplier: 1,
+    moth_multiplier_prices: [0,0,100,10000,1000000],
     click_multiplier: 1,
     bulb_level: 1
 };
@@ -53,7 +54,7 @@ const change_lightness = (light_volume) => {
 };
 const set_intervals = () => {
     /* Darken light in time */
-    const light_interval = setInterval(()=>{
+    const light_interval = setInterval( () => {
         if(lightess>100){
             lightess-=10;
             change_lightness(lightess);
@@ -92,26 +93,42 @@ const set_intervals = () => {
                     'top': verticalCener,
                     'left': horizontalCenter
                     
-                }, 1000, function () { 
+                }, 1200,  function () { 
                     $(this).remove();
-                    game.moth_counter++;
-                    game.moth_counter_total++;
-                    document.cookie = "moth_counter="+game.moth_counter;
-                    document.cookie = "moth_counter_total="+game.moth_counter_total;
+                    new_moth();
                     print_moths();
                 });
             }
         }
         },1000/game.moth_multiplier);
 };
-
+const new_moth = () => {
+    game.moth_counter++;
+    game.moth_counter_total++;
+    document.cookie = "moth_counter="+game.moth_counter;
+    document.cookie = "moth_counter_total="+game.moth_counter_total;
+    check_prices();
+    
+};
+const check_prices = () => {
+    
+  
+};
 const addListeners = () => {
     $("#head").click( () => {
-        console.log("clicked");
-        /*if(lightess+50<1000){
+        if(lightess+50<1000){
             lightess+=50;
             change_lightness(lightess);
-        }*/
+        }
+    });
+    $("#multiplier").click( () => {
+        console.log(game.moth_multiplier_prices[game.moth_multiplier+1],game.moth_counter);
+        if(game.moth_multiplier_prices[game.moth_multiplier+1] <= game.moth_counter){
+            game.moth_counter -= game.moth_multiplier_prices[game.moth_multiplier+1];
+            game.moth_multiplier++;
+            $("#multiplier").html("Multiplier: " + game.moth_multiplier + " ("+game.moth_multiplier_prices[game.moth_multiplier+1] + ")");
+            print_moths();
+        }
     });
 };
 

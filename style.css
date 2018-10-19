@@ -1,7 +1,7 @@
 body{
     background: rgb(51, 51, 51);
     font-family: Tajawal; 
-    /*overflow: hidden;*/
+    overflow: hidden;
     
     padding: 10px;
     font-size: 20px;
@@ -33,12 +33,12 @@ body{
     background-image: repeating-linear-gradient(5deg, #ccc, #ccc 10px, #dbdbdb 5px, #dbdbdb 15px);
 }
 .moth{
-    width:70px;
-    height:70px;
+    width:100px;
+    height:100px;
     position:absolute;
     background-image: url("moth.png");
     background-repeat: no-repeat;
-    background-size: 70px 70px;
+    background-size: 100px 100px;
     border-radius:70px;
     z-index:-1;
 }
@@ -46,4 +46,7 @@ body{
     width:200px;
     font-size:30px;
     padding-bottom:10px;
+}
+#multiplier:hover{
+    color: grey;
 }
